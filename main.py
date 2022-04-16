@@ -40,7 +40,7 @@ class ImageColours:
                     if j == 9 or self.colors[i] <= sum(top[j + 1].values()):
                         top[j] = {i: self.colors[i]}
                         break
-        print(top)
+        return [{'#%02x%02x%02x' % list(i.keys())[0]: sum(i.values())} for i in top]
 
 
 image_results = ''
@@ -65,6 +65,9 @@ def home():
 @app.route('/results')
 def results():
     return render_template("results.html", results=image_results)
+
+iage_obj = ImageColours("https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/UO_KnightLibrary_Front.jpg/250px-UO_KnightLibrary_Front.jpg")
+print(iage_obj.topten())
 
 
 if __name__ == "__main__":
