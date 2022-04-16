@@ -14,14 +14,33 @@ Bootstrap(app)
 
 class ImageColours:
     def __init__(self, url):
-        self.url = url
-        ext = self.url.split('.')[-1]
-        ur.urlretrieve(self.url, "aaa."+ext)
-        self.image = Image.open("aaa."+ext)
-        self.img_array = np.array(self.image)
+        ext = url.split('.')[-1]
+        ur.urlretrieve(url, "aaa." + ext)
+        image = Image.open("aaa." + ext)
+        self.img_array = np.array(image)
+        self.colors = self.retrieve_results()
 
     def retrieve_results(self):
-        return ['']
+        shape = self.img_array.shape
+        colors = {}
+        for i in range(shape[0]):
+            for j in range(shape[1]):
+                key = (self.img_array[i][j][0], self.img_array[i][j][1], self.img_array[i][j][2])
+                if key in colors:
+                    colors[key] += 1
+                else:
+                    colors[key] = 1
+        return colors
+
+    def topten(self):
+        top = [{(0, 0, 0): 0} for i in range(10)]
+        for i in self.colors:
+            for j in range(10):
+                if self.colors[i] > sum(top[j].values()):
+                    if j == 9 or self.colors[i] <= sum(top[j + 1].values()):
+                        top[j] = {i: self.colors[i]}
+                        break
+        print(top)
 
 
 image_results = ''
@@ -38,19 +57,14 @@ def home():
     if form.validate_on_submit():
         global image_results
         image_obj = ImageColours(form.img_url.data)
-        image_obj.retrieve_image()
-        image_results = image_obj.retrieve_results()
+        image_results = image_obj.topten()
         return redirect(url_for("results"))
     return render_template("index.html", form=form)
 
 
 @app.route('/results')
 def results():
-
     return render_template("results.html", results=image_results)
-
-image_obj = ImageColours("https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/UO_KnightLibrary_Front.jpg/800px-UO_KnightLibrary_Front.jpg")
-image_obj.retrieve_results()
 
 
 if __name__ == "__main__":
