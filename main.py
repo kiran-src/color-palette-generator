@@ -66,9 +66,5 @@ def home():
 def results():
     return render_template("results.html", results=image_results)
 
-iage_obj = ImageColours("https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/UO_KnightLibrary_Front.jpg/250px-UO_KnightLibrary_Front.jpg")
-print(iage_obj.topten())
-
-
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
