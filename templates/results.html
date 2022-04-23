@@ -1,3 +1,9 @@
 {% include "header.html" %}
 
-<body></body>
+<body>
+<ul>
+{% for i in results%}
+    <li>{{i}}</li>
+{% endfor %}
+</ul>
+</body>

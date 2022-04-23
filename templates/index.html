@@ -1,2 +1,5 @@
 {% include "header.html" %}
-<body></body>
+{% import "bootstrap/wtf.html" as wtf %}
+<body>
+{{ wtf.quick_form(form, novalidate=True) }}
+</body>
