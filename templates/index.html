@@ -1,5 +1,24 @@
 {% include "header.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 <body>
+
+  <header class="masthead" style="background-image: url('https://miuc.org/wp-content/uploads/2018/02/How-can-colours-help-you-in-your-everyday-life.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Image Colour Palette</h1>
+            <span class="subheading">Find out the top 10 colours from any image!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
 {{ wtf.quick_form(form, novalidate=True) }}
+    </div></div></div>
 </body>

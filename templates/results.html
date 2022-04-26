@@ -1,9 +1,31 @@
 {% include "header.html" %}
 
 <body>
-<ul>
+  <header class="masthead" style="background-image: url('{{url}}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Image Colour Palette</h1>
+            <span class="subheading">Find out the top 10 colours from any image!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+<table>
 {% for i in results%}
-    <li>{{i}}</li>
+    <tr>
+    <th style="background-color: {{i[0]}}; width: 20%;">      </th>
+    <th>{{i[0]}}</th>
+    <th>{{i[1]}} Pixels</th>
+    </tr>
 {% endfor %}
-</ul>
+</table>
+    </div></div></div>
 </body>
